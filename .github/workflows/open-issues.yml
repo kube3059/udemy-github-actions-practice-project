@@ -8,9 +8,13 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { getOctokit, context } = require('@actions/github');
+            const github = getOctokit(process.env.GITHUB_TOKEN);
             const issues = await github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open'
             });
             console.log('Open issues:', issues.data);
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
