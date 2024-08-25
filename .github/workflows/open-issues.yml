@@ -1,0 +1,16 @@
+name: Output open issues data
+on: issues
+jobs:
+  output-issue-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output issue info
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issues = await github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            console.log('Open issues:', issues.data);
