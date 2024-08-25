@@ -15,7 +15,7 @@ jobs:
       - name: Install eslint
         run: npm install eslint
       - name: Run linter
-        run: eslint --ext .jsx --fix src
+        run: npx eslint --ext .jsx --fix src
   test:
     runs-on: ubuntu-latest
     needs: lint
